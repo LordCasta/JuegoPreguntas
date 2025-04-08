@@ -73,27 +73,29 @@ namespace JuegoPreguntas
             if (string.IsNullOrEmpty(categoria) || string.IsNullOrEmpty(dificultad))
             {
                 MessageBox.Show("Seleccione categoría y dificultad.");
-                return;
             }
-
-            var todas = PreguntasFactory.ObtenerPreguntas(categoria)
-                .Where(p => p.Dificultad.Equals(dificultad, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(p => Guid.NewGuid()) // Randomiza
-                .Take(15)
-                .ToList();
-
-            if (todas.Count == 0)
+            else
             {
-                MessageBox.Show("No hay preguntas disponibles para esta selección.");
-                return;
+               var todas = PreguntasFactory.ObtenerPreguntas(categoria)
+               .Where(p => p.Dificultad.Equals(dificultad, StringComparison.OrdinalIgnoreCase))
+               .OrderBy(p => Guid.NewGuid()) // Randomiza
+               .Take(15)
+               .ToList();
+
+                if (todas.Count == 0)
+                {
+                    MessageBox.Show("No hay preguntas disponibles para esta selección.");
+                    return;
+                }
+
+                preguntasActuales = todas;
+                indicePregunta = 0;
+                correctas = incorrectas = puntaje = 0;
+                btnIniciar.Enabled = false;
+
+                MostrarPreguntaActual();
             }
-
-            preguntasActuales = todas;
-            indicePregunta = 0;
-            correctas = incorrectas = puntaje = 0;
-            btnIniciar.Enabled = false;
-
-            MostrarPreguntaActual();
+           
         }
 
         private void MostrarPreguntaActual()
@@ -101,27 +103,30 @@ namespace JuegoPreguntas
             if (indicePregunta >= preguntasActuales.Count)
             {
                 FinalizarJuego();
-                return;
+            }
+            else
+            {
+                Pregunta pregunta = preguntasActuales[indicePregunta];
+                txtPregunta.Text = pregunta.Enunciado;
+
+                rdbR1.Text = pregunta.Opciones[0];
+                rdbR2.Text = pregunta.Opciones[1];
+                rdbR3.Text = pregunta.Opciones[2];
+
+                rdbR1.Checked = rdbR2.Checked = rdbR3.Checked = false;
+
+                rdbR1.Visible = rdbR2.Visible = rdbR3.Visible = true;
+
+                lblFeedback.Text = "";
+
+                // Tiempo según dificultad
+                tiempoRestante = pregunta.Dificultad.ToLower() == "fácil" ? 20 :
+                                 pregunta.Dificultad.ToLower() == "media" ? 15 : 10;
+
+                temporizador.Start();
             }
 
-            Pregunta pregunta = preguntasActuales[indicePregunta];
-            txtPregunta.Text = pregunta.Enunciado;
-
-            rdbR1.Text = pregunta.Opciones[0];
-            rdbR2.Text = pregunta.Opciones[1];
-            rdbR3.Text = pregunta.Opciones[2];
-
-            rdbR1.Checked = rdbR2.Checked = rdbR3.Checked = false;
-
-            rdbR1.Visible = rdbR2.Visible = rdbR3.Visible = true;
-
-            lblFeedback.Text = "";
-
-            // Tiempo según dificultad
-            tiempoRestante = pregunta.Dificultad.ToLower() == "fácil" ? 20 :
-                             pregunta.Dificultad.ToLower() == "media" ? 15 : 10;
-
-            temporizador.Start();
+           
         }
 
         private void Temporizador_Tick(object sender, EventArgs e)

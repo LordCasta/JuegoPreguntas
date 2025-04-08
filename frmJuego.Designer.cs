@@ -44,8 +44,6 @@
             this.rdbR3 = new System.Windows.Forms.RadioButton();
             this.rdbR2 = new System.Windows.Forms.RadioButton();
             this.lblFeedback = new System.Windows.Forms.Label();
-            this.lblTiempoRestante = new System.Windows.Forms.Label();
-            this.prgbTiempo = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReiniciar = new System.Windows.Forms.Button();
             this.lblPuntaje = new System.Windows.Forms.Label();
@@ -192,23 +190,6 @@
             this.lblFeedback.TabIndex = 22;
             this.lblFeedback.Text = "Feedback";
             // 
-            // lblTiempoRestante
-            // 
-            this.lblTiempoRestante.AutoSize = true;
-            this.lblTiempoRestante.ForeColor = System.Drawing.Color.IndianRed;
-            this.lblTiempoRestante.Location = new System.Drawing.Point(303, 249);
-            this.lblTiempoRestante.Name = "lblTiempoRestante";
-            this.lblTiempoRestante.Size = new System.Drawing.Size(54, 16);
-            this.lblTiempoRestante.TabIndex = 23;
-            this.lblTiempoRestante.Text = "Tiempo";
-            // 
-            // prgbTiempo
-            // 
-            this.prgbTiempo.Location = new System.Drawing.Point(411, 249);
-            this.prgbTiempo.Name = "prgbTiempo";
-            this.prgbTiempo.Size = new System.Drawing.Size(195, 19);
-            this.prgbTiempo.TabIndex = 24;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnReiniciar);
@@ -276,8 +257,6 @@
             this.ClientSize = new System.Drawing.Size(916, 661);
             this.Controls.Add(this.btnResponder);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.prgbTiempo);
-            this.Controls.Add(this.lblTiempoRestante);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.rdbR2);
@@ -319,8 +298,6 @@
         private System.Windows.Forms.RadioButton rdbR3;
         private System.Windows.Forms.RadioButton rdbR2;
         private System.Windows.Forms.Label lblFeedback;
-        private System.Windows.Forms.Label lblTiempoRestante;
-        private System.Windows.Forms.ProgressBar prgbTiempo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblPuntaje;
         private System.Windows.Forms.Label lblIncorrectas;
